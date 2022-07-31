@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
 
 // ===============================================
 
-server.listen(3000, () => {
-  return console.log(`server is listening on ${port}`)
-})
-// server.listen(process.env.PORT || 80)
+// server.listen(3000, () => {
+//   return console.log(`server is listening on ${port}`)
+// })
+server.listen(process.env.PORT || 80)

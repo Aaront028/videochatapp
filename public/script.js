@@ -35,7 +35,12 @@ socket.on('user-disconnected', (userId) => {
 })
 
 myPeer.on('open', (id) => {
-  socket.emit('join-room', ROOM_ID, id)
+  socket.emit(
+    'join-room',
+    ROOM_ID,
+    id,
+    console.log('id: ' + id, 'room_id:' + ROOM_ID)
+  )
 })
 
 function connectToNewUser(userId, stream) {
@@ -52,7 +57,7 @@ function connectToNewUser(userId, stream) {
   peers[userId] = call
 }
 
-//this is to display screen share
+// this is to display screen share
 // navigator.mediaDevices
 //   .getDisplayMedia({
 //     video: true,
@@ -62,7 +67,7 @@ function connectToNewUser(userId, stream) {
 //     addVideoStream(myVideo, stream)
 //   })
 
-//test code
+// test code
 // socket.on('user-connected', (userId) => {
 //   console.log('user connected' + userId)
 // })

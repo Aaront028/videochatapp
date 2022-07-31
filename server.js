@@ -1,7 +1,14 @@
+// const express = require('express')
+// const app = express()
+// const server = require('http').Server(app)
+// const io = require('socket.io')(server)
 const express = require('express')
 const app = express()
-const server = require('http').Server(app)
-const io = require('socket.io')(server)
+const http = require('http')
+const server = http.createServer(app)
+const { Server } = require('socket.io')
+const io = new Server(server)
+
 const { v4: uuidV4 } = require('uuid')
 
 app.set('view engine', 'ejs')
@@ -17,6 +24,7 @@ app.get('/:room', (req, res) => {
 
 io.on('connection', (socket) => {
   socket.on('join-room', (roomId, userId) => {
+    console.log('entered the room' + roomId + ' with the user id: ' + userId)
     socket.join(roomId)
     socket.to(roomId).emit('user-connected', userId)
 
@@ -26,5 +34,12 @@ io.on('connection', (socket) => {
   })
 })
 
-// server.listen(3000)
-server.listen(process.env.PORT || 80)
+io.on('connection', (socket) => {
+  socket.broadcast.emit('hi')
+  console.log('connected')
+})
+
+// ===============================================
+
+server.listen(3000)
+// server.listen(process.env.PORT || 80)

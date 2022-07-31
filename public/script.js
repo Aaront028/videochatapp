@@ -1,8 +1,8 @@
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
-const myPeer = new Peer('someid', {
+const myPeer = new Peer(undefined, {
   secure: true,
-  host: 'murmuring-plains-38810.herokuapp.com',
+  host: 'murmuring-plains-38810.herokuapp.com' || '/',
   port: '3001',
 })
 

@@ -26,7 +26,8 @@ io.on('connection', (socket) => {
   socket.on('join-room', (roomId, userId) => {
     console.log('entered the room' + roomId + ' with the user id: ' + userId)
     socket.join(roomId)
-    socket.to(roomId).emit('user-connected', userId)
+
+    socket.broadcast.to(roomId).emit('user-connected', userId)
 
     socket.on('disconnect', () => {
       socket.to(roomId).emit('user-disconnected', userId)
@@ -34,12 +35,9 @@ io.on('connection', (socket) => {
   })
 })
 
-io.on('connection', (socket) => {
-  socket.broadcast.emit('hi')
-  console.log('connected')
-})
-
 // ===============================================
 
-// server.listen(3000)
-server.listen(process.env.PORT || 80)
+server.listen(3000, () => {
+  return console.log(`server is listening on ${port}`)
+})
+// server.listen(process.env.PORT || 80)

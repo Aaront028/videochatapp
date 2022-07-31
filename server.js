@@ -25,19 +25,18 @@ app.get('/:room', (req, res) => {
 io.on('connection', (socket) => {
   socket.on('join-room', (roomId, userId) => {
     console.log('entered the room' + roomId + ' with the user id: ' + userId)
-    setTimeout(() => {
-      socket.join(roomId)
 
-      socket.to(roomId).emit('user-connected', userId)
+    socket.join(roomId)
 
-      socket.on(
-        'disconnect',
-        () => {
-          socket.to(roomId).emit('user-disconnected', userId)
-        },
-        1000
-      )
-    })
+    socket.to(roomId).emit('user-connected', userId)
+
+    socket.on(
+      'disconnect',
+      () => {
+        socket.to(roomId).emit('user-disconnected', userId)
+      },
+      1000
+    )
   })
 })
 

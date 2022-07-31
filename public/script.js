@@ -28,9 +28,9 @@ navigator.mediaDevices
     })
 
     socket.on('user-connected', (userId) => {
-      // user is joining`
       setTimeout(() => {
         // user joined
+        console.log('user ' + userId + 'just joined')
         connectToNewUser(userId, stream)
       }, 1000)
     })
@@ -38,7 +38,10 @@ navigator.mediaDevices
 
 socket.on('user-disconnected', (userId) => {
   setTimeout(() => {
-    if (peers[userId]) peers[userId].close()
+    if (peers[userId]) {
+      peers[userId].close()
+      console.log('user ' + userId + 'disconnected')
+    }
   }, 1000)
 })
 

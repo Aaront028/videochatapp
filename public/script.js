@@ -37,7 +37,9 @@ navigator.mediaDevices
   })
 
 socket.on('user-disconnected', (userId) => {
-  if (peers[userId]) peers[userId].close()
+  setTimeout(() => {
+    if (peers[userId]) peers[userId].close()
+  }, 1000)
 })
 
 myPeer.on('open', (id) => {
@@ -57,7 +59,9 @@ function connectToNewUser(userId, stream) {
       addVideoStream(video, userVideoStream)
     })
     call.on('close', () => {
-      video.remove()
+      setTimeout(() => {
+        video.remove()
+      }, 1000)
     })
     peers[userId] = call
   }

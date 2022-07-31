@@ -1,10 +1,5 @@
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
-// const myPeer = new Peer(undefined, {
-//   secure: true,
-//   host: 'murmuring-plains-38810.herokuapp.com',
-//   port: '443',
-// })
 
 const myPeer = new Peer(undefined, {
   host: 'peerjs-server.herokuapp.com',
@@ -64,8 +59,8 @@ function connectToNewUser(userId, stream) {
     call.on('close', () => {
       video.remove()
     })
+    peers[userId] = call
   }
-  peers[userId] = call
 }
 
 // this is to display screen share

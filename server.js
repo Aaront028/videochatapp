@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
     console.log('entered the room' + roomId + ' with the user id: ' + userId)
     socket.join(roomId)
 
-    socket.broadcast.to(roomId).emit('user-connected', userId)
+    socket.to(roomId).emit('user-connected', userId)
 
     socket.on('disconnect', () => {
       socket.to(roomId).emit('user-disconnected', userId)
